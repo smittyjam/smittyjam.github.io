@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- A viewport is what is AUTOMATICALLY the 'virtual' window which a website is natively rendered in - which may differ to the actual pixel window available on the relevant screen. This 'virtual' window is then 'shrunk' (without changing the px width etc) so it can be seen all at once. If it cannot be seen all at once, scrollbars will be included.
+    
+    The viewport meta tag allows us to MANUALLY set the 'virtual' window dimensions and scale - ie. to ensure it aligns with the px dimensions of the actual screen 
+    
+    width=device-width: manually sets width as the width of the screen in CSS pixels (at a scale of 100%).
+
+    The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.-->
+    
+    <title>Landing Page</title>
+    <!-- decided to use one single css (and include CSS media queries within that css) rather tha nhaving different css files for each device size>-->
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" >
+   
+    <!-- rel is short for relation. It specifies the relation between the link and href (ie. is a stylesheet).
+
+    'type' attribute sets the value (ie. text/css) sets the MIME type of the docs 
+    href stands for hypertext reference. It's the source of the file called by the tag.
+
+    media= xxx -> 'xxx' value indicates the criteria required to engage the in-line href
+    -->
+    
+</head>
+<body>
+<!--- PAGE BRAND/HEADER -->
+    
+<header class="clearfix sticky">
+    <h1 class="sticky">[input - usrname.php]'s streems</h1>  
+    <a href="#"></a> 
+</header>
+
+<!-----body start-->
+<div class ="grid-container clearfix body-container">
+
+    <div class = "col-t-3 col-d-3 body-style">
+        <h2>API 1</h2>
+            <form action="upload.php" method="post" enctype="multipart/form-data"> 
+                <label for = "videoSelect">Select file pls: </label>
+                <input type="file" name="uploadedVid" accept="video/mp4,text/plain" id="videoSelect">
+                <input type="submit" name="upload" value="Upload Video!">
+            </form>
+    </div>
+    
+    <div class = "col-t-3 col-d-3 body-style">
+            <h2>API 1</h2>
+                <form action="uploadAudio.php" method="post" enctype="multipart/form-data">
+                    <input type ="file" name="uploadAudio" accept=".mp3"> <!-- the 'accept' attribute only limits the filetype by blinding irrelvant filetypes in the upload window -->
+                    <input type ="submit" name="uploadAudio" value="Upload Audio"> <!-- value = the name on the submit button -->
+                </form>
+    </div>  
+    <div class = "col-t-6 col-d-6 body-style">
+        <h2>API 3</h2>
+    </div>
+</div>
+
+
+<footer>
+    <p>Latest activity from [input-usrname.py]: [xyz]</p>
+    <br>
+    <a href="#">about streems</a>
+</footer>
+</body>
+
+</html>

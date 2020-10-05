@@ -1,0 +1,184 @@
+/*PRELIM CODE: RESPONSIVE GRID SYSTEM */
+
+    /* CSS Breakpoints - target WIDTH; not HEIGHT because vertical scrolling feels natural. Horizontal scrolling does not --- http://www.websitedimensions.com/    
+        width smaller than or equal to 768 px (smartphones)
+        width larger than 768 px (small devices, tablets)
+        width larger than 992 px (medium devices)
+        width larger than 1200px (large devices)
+
+    CSS rules not enclosed within a @media section applies to EVERYONE. Code within a @media section will only be used for the code within that query.
+
+    MOBILE FIRST means designing for mobile before designing for desktop or any other device (This will make the page display faster on smaller devices)
+
+    */
+
+* {
+    box-sizing: border-box;
+    /* For RESPONSIVE: This border-box model makes sure that the padding and border of each element is included in the total width and height of the elements. */
+    padding:0;
+    margin:0;
+    
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+/* Utilising a CSS grid system -  ref see http://j4n.co/blog/Creating-your-own-css-grid-system*/
+
+/* 1. The purpose of the CONTAINER ELEMENT is to set the width of the entire grid. The width of the container is generally 100%*/
+.grid-container { 
+    width:100%; /* ie. of the viewport*/
+}
+
+/* 2. the ROW element is to keep the columns in it from overflowing into the next row below = the row element is the clearfix hack per belows.*/
+
+.clearfix:before, 
+.clearfix:after { /*the clearfix CSS to clear further block-level children elements that have been floated. 
+- also consider newish css methods flexbox and CSS Grid
+    
+    want the bottom of the containing element to be placed 'clear' past the bottom of the child element that has floated,
+    
+    html class to use is just "group" - not "group:after". For CSS3 --> distinguish 
+        PSEUDO-CLASSES (Is a selector of partial aspects of an element under certain conditions, ie. :hover, :visited, :active - ':') vs. 
+        PSEUDO-ELEMENTS (Creates a new element that normally doesnt exist in the DOM, ie. ::after, ::before. ::first-letter - '::'). */
+  content: "";
+  display: block;
+  clear: both; /* ie the main clear property - here, clears left and right floated child elements (if they both exist) - see helpfully https://developer.mozilla.org/en-US/docs/Web/CSS/clear */
+}
+/* RP up to here*/
+
+/* 3. the COLUMN element - apparently the most complicated part of the grid.  */
+
+[class*='col-'] {
+    /* https://www.tutorialrepublic.com/css-tutorial/css-attribute-selectors.php --- square brackets are CSS ATTRIBUTE selectors (ie. class =...) - it will engage all elements that has this attribute with the value col-... [class*="col-"] = this attibute selector matches all HTML elements that contains the class attribute with the value 'col-' , so includes col-2, col-3 etc. */
+    float: left;  /*FLOATS,inline-blocks, display table, display-flex are all different ways to position columns in CSS - but GENERALLY the most robust and widely used is the FLOAT method, which pushes each element with the class ("col-") to either the LEFT or RIGHT of its PARENT CONTAINER */
+    min-height: 1px; /*If columns are empty (and so 0px), the floated columns will stack ON TOP of each other. Giving a min-height of 1px to the floated columns will ensure they stay in the flow of the floated elements and not get overlapped*/
+    padding:10px; /* this is the gutter, so the spacing between each column */
+    
+/* FOR MOBILE FIRST - each column is 100% wide, subject to larger media query columns below */
+    width: 100%; 
+}  
+
+/* 4. BASE column width (anything larger than default phone) found by dividing total number of maximum desired base columns by the width of the container. Should start with the maximum number of columns you may need in the grid, and work your way down to 1. See below. THese are also all caught by the attribute selector above: */
+
+/* we are starting with 6 strutural columns*/
+
+/* MEDIA QUERY: FOR TABLETS */
+@media only screen and (min-width: 481px) and (max-width: 768px) { /* = media query block engaged when screen is between 481px and 768px */
+    
+    .col-t-1 {
+    width: 16.66%; /*For the maximum of 6 columns in the container, 1 base column will be 100%/6 = 16.66% */
+    }
+
+    .col-t-2 {
+    width: 33.33%; /* 16.66% + 16.66% = 33.33% */
+    }
+
+    .col-t-3 {
+    width: 50%; /* + 16.66% */
+    }
+
+    .col-t-4 {
+    width: 66.664%; /* + 16.66% */
+    }
+
+    .col-t-5 {
+    width: 83.33%; /* + 16.66% */
+    }
+
+    .col-t-6 {
+    width: 100%; /* + 16.66% */
+    }
+}
+
+/* MEDIA QUERY: FOR DESKTOP -- It might seem odd that we have two sets of identical classes (ie. with tablet), but it gives us the opportunity in HTML, to decide what will happen with the columns at each breakpoint:*/ 
+@media only screen and (min-width: 769px) { /* = media query block engaged when screen is AT LEAST 769px */
+    
+    .col-d-1 {
+    width: 16.66%; /*For the maximum of 6 columns in the container, 1 base column will be 100%/6 = 16.66% */
+    }
+
+    .col-d-2 {
+    width: 33.33%; /* 16.66% + 16.66% = 33.33% */
+    }
+
+    .col-d-3 {
+    width: 50%; /* + 16.66% */
+    }
+
+    .col-d-4 {
+    width: 66.664%; /* + 16.66% */
+    }
+
+    .col-d-5 {
+    width: 83.33%; /* + 16.66% */
+    }
+
+    .col-d-6 {
+    width: 100%; /* + 16.66% */
+    }
+}
+/*--------ELEMENT-SPECIFIC CODE---------- */
+
+header {
+    min-height:inherit;
+    height:10vh;
+    background-color:white;
+    z-index: 1;
+}
+
+header h1  {
+    display:block;
+    position:relative;
+    font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+	font-size: 2.5vw; /*The text size can be set with a "vw" unit, which means the "viewport width". 1 vw unit = 1% of the viewport width. That way the text size will follow the size of the browser window:*/
+	font-style: italic;
+	font-weight: 500;
+	line-height:8vh;
+    margin-top:0.4%;
+    margin-left:1%;
+    float:left;
+}
+
+.sticky { /*Position: 'sticky' elements are positioned based on the scroll position. So if the sticky element's (ie. the header) attribute is top:0, when the user scrolls, the sticky element is engaged and so it will always be at the top */
+/* webkit/moz/o/ms are vendor properties offered by relevant browser - for renderwing proprietary CSS features, before final clarification and standardisation by W3C*/
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -o-sticky;
+    position: -ms-sticky;
+    position: sticky;
+    top: 0;
+}
+
+
+
+.body-container {
+    text-align:center;
+    min-height:40vh;
+}
+
+.body-style{
+    background-color:darkgray;
+    border: 1px solid black;
+    min-height:inherit;
+}
+
+.button-container {
+    text-align:center; /*text-align should be applied to the PARENT CONTAINER, and its effect will be on all the CHILD ELEMENTS within that parent-container*/
+}
+
+footer {
+    color:white;
+    background-color:black;
+    min-height:10vh;
+    padding:20px
+    
+}
+
+footer p {
+    text-align:right
+}
+
+footer a {
+    float:right;
+    color:white;
+}
