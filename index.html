@@ -26,7 +26,16 @@
     
 </head>
 <body>
-    <script src="fbAPI.js" async></script> <!-- FB app -->
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '605002377072519',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v9.0'
+        });
+      };
+    </script> <!-- FB app -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <!--- PAGE BRAND/HEADER -->
     
