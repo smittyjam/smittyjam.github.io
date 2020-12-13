@@ -27,16 +27,17 @@
 </head>
 <body>
     <script>
-    window.fbAsyncInit = function() {
-        FB.init({
-          appId            : '605002377072519',
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v9.0'
-        });
-      };
-    </script> <!-- FB app -->
+        window.fbAsyncInit = function() {
+            FB.init({
+              appId            : '605002377072519',
+              autoLogAppEvents : true,
+              xfbml            : true,
+              version          : 'v9.0'
+            });
+          };
+    </script> <!-- FB app-->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script async src="AJAX.js"></script>
 <!--- PAGE BRAND/HEADER -->
     
 <header class="clearfix sticky">
@@ -54,12 +55,7 @@
                 <input type="file" name="uploadedVid" accept="video/mp4,text/plain" id="videoSelect">
                 <input type="submit" name="upload" value="Upload Video!">
             </form>
-        <div
-          class="fb-like"
-          data-share="true"
-          data-width="450"
-          data-show-faces="true">
-        </div>
+        
     </div>
     
     <div class = "col-t-3 col-d-3 body-style">
